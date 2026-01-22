@@ -54,13 +54,27 @@ class NHLTravelMap {
                 fillOpacity: 0.8
             }).addTo(this.map);
 
-            marker.bindPopup(`
-                <strong>${team.name}</strong><br>
-                ${team.city}<br>
-                <span style="color: #4ecdc4;">Click for details</span>
-            `);
+            const popupContent = `
+                <div style="cursor: pointer;" class="team-popup" data-team-id="${team.id}">
+                    <strong>${team.name}</strong><br>
+                    ${team.city}<br>
+                    <span style="color: #4ecdc4;">Click for details</span>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
 
             marker.on('click', () => this.showTeamDetails(team.id));
+
+            marker.on('popupopen', () => {
+                const popup = document.querySelector('.team-popup');
+                if (popup) {
+                    popup.addEventListener('click', () => {
+                        this.showTeamDetails(team.id);
+                        this.highlightTeamRoutes(team.id);
+                    });
+                }
+            });
 
             this.markers[team.id] = marker;
         });
