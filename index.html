@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHL Team Travel Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NHL Team Travel Map</h1>
+            <div class="season-selector">
+                <label for="season-select">Season:</label>
+                <select id="season-select">
+                    <option value="20252026">2025-2026</option>
+                    <option value="20242025">2024-2025</option>
+                    <option value="20232024">2023-2024</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="timeline-container">
+                    <div class="timeline-controls">
+                        <button id="play-pause-btn" class="control-btn">▶ Play</button>
+                        <button id="reset-btn" class="control-btn">⟲ Reset</button>
+                        <span id="current-date" class="date-display">Select a season</span>
+                    </div>
+                    <div class="timeline-slider">
+                        <input type="range" id="timeline" min="0" max="100" value="0" step="1">
+                        <div class="timeline-labels">
+                            <span>Season Start</span>
+                            <span>Season End</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="leaderboard">
+                    <h2>Distance Traveled</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All Time</button>
+                        <button class="filter-btn" data-filter="current">Current Point</button>
+                    </div>
+                    <div id="leaderboard-list" class="leaderboard-list">
+                        <div class="loading">Loading team data...</div>
+                    </div>
+                </div>
+
+                <div class="team-info">
+                    <h2>Team Details</h2>
+                    <div id="team-details" class="team-details">
+                        <p>Click on a team marker to see details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="nhl-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
