@@ -124,13 +124,14 @@ class NHLTravelMap {
             const endDate = new Date(nhlDataService.getSeasonEndDate(season));
             this.allGames = nhlDataService.getGamesUpToDate(this.scheduleData, endDate);
 
-            // Set up timeline
+            // Set up timeline - start at 25% of season to show some data
             const timeline = document.getElementById('timeline');
             timeline.max = this.allGames.length - 1;
-            timeline.value = 0;
+            const startPosition = Math.floor(this.allGames.length * 0.25);
+            timeline.value = startPosition;
 
-            this.currentGameIndex = 0;
-            this.updateTimelinePosition(0);
+            this.currentGameIndex = startPosition;
+            this.updateTimelinePosition(startPosition);
 
             console.log(`Loaded ${this.allGames.length} games for season ${season}`);
         } catch (error) {
@@ -144,10 +145,11 @@ class NHLTravelMap {
 
             const timeline = document.getElementById('timeline');
             timeline.max = this.allGames.length - 1;
-            timeline.value = 0;
+            const startPosition = Math.floor(this.allGames.length * 0.25);
+            timeline.value = startPosition;
 
-            this.currentGameIndex = 0;
-            this.updateTimelinePosition(0);
+            this.currentGameIndex = startPosition;
+            this.updateTimelinePosition(startPosition);
         }
     }
 
